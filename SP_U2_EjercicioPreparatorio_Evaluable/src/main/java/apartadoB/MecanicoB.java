@@ -4,7 +4,7 @@ import java.util.concurrent.Semaphore;
 
 public class MecanicoB implements Runnable {
 
-    private String nombre; 
+    private String nombre;
     private Semaphore semaforoCoches; 
     private Semaphore semaforoMecanicos; 
     private int tiempoReparacion; 
@@ -20,23 +20,24 @@ public class MecanicoB implements Runnable {
 
     @Override
     public void run() {
-        while (contadorCoches.getNumeroCoches() > 0) {
-            try 
-            {
-                semaforoMecanicos.acquire();
-                if (contadorCoches.getNumeroCoches() > 0) {
-                    System.out.println(nombre +" está reparando un coche.");
+        try 
+        {
+            while (contadorCoches.getNumeroCoches() > 0) {
+                semaforoMecanicos.acquire(); 
+                if (contadorCoches.getNumeroCoches() > 0) 
+                {
+                    System.out.println(nombre + " está reparando un coche.");
                     Thread.sleep(tiempoReparacion * 1000); 
                     contadorCoches.decrementar(); 
                     semaforoCoches.release(); 
-                    System.out.println(nombre + " ha terminado de reparar un coche.");
+                    System.out.println(nombre +" ha terminado de reparar un coche.");
                 }
-            } 
-            catch(InterruptedException e) 
-            {
-                e.printStackTrace();
             }
+        } 
+        catch (InterruptedException e) 
+        {
+            e.printStackTrace();
         }
-        System.out.println(nombre +" ha terminado su jornada.");
+        System.out.println(nombre + " ha terminado su jornada.");
     }
 }

@@ -18,10 +18,10 @@ public class CocheB implements Runnable {
     public void run() {
         try 
         {
-            System.out.println("Coche id-" +id + " está esperando para ser reparado.");
+            System.out.println("Coche id-" +id + " esperando reparación.");
             semaforoMecanicos.release(); 
             semaforoCoches.acquire(); 
-            System.out.println("Coche id-" +id + " ha sido reparado y se va del taller.");
+            System.out.println("Coche id-" + id + " ha sido reparado.");
         } 
         catch (InterruptedException e) 
         {
